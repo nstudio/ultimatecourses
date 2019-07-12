@@ -20,41 +20,41 @@ Let's start by creating a `scss/_index.scss`(we create a `scss` folder in the ro
 
 ```scss
 // {N} variables which are used by core theme + our own
-@import 'variables';
+@import "variables";
 
 // {N} mixins which are used by core theme + our own
-@import 'mixins';
-@import 'animations';
+@import "mixins";
+@import "animations";
 
 // {N} core theme rulesets (mix/match these to use what you want/need)
-@import '~nativescript-theme-core/scss/action-bar';
-@import '~nativescript-theme-core/scss/activity-indicator';
-@import '~nativescript-theme-core/scss/buttons';
-@import '~nativescript-theme-core/scss/icons';
-@import '~nativescript-theme-core/scss/forms';
-@import '~nativescript-theme-core/scss/labels';
-@import '~nativescript-theme-core/scss/list-view';
-@import '~nativescript-theme-core/scss/page';
-@import '~nativescript-theme-core/scss/progress';
-@import '~nativescript-theme-core/scss/segmented-bar';
-@import '~nativescript-theme-core/scss/side-drawer';
-@import '~nativescript-theme-core/scss/slider';
-@import '~nativescript-theme-core/scss/switch';
-@import '~nativescript-theme-core/scss/tabs';
+@import "~nativescript-theme-core/scss/action-bar";
+@import "~nativescript-theme-core/scss/activity-indicator";
+@import "~nativescript-theme-core/scss/buttons";
+@import "~nativescript-theme-core/scss/icons";
+@import "~nativescript-theme-core/scss/forms";
+@import "~nativescript-theme-core/scss/labels";
+@import "~nativescript-theme-core/scss/list-view";
+@import "~nativescript-theme-core/scss/page";
+@import "~nativescript-theme-core/scss/progress";
+@import "~nativescript-theme-core/scss/segmented-bar";
+@import "~nativescript-theme-core/scss/side-drawer";
+@import "~nativescript-theme-core/scss/slider";
+@import "~nativescript-theme-core/scss/switch";
+@import "~nativescript-theme-core/scss/tabs";
 
 // app customizations
-@import 'action-bar';
-@import 'fonts';
-@import 'buttons';
+@import "action-bar";
+@import "fonts";
+@import "buttons";
 
 // {N} core theme utilities are additive to any above class, these should always be last
 // includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/master/app/scss/utilities
-@import '~nativescript-theme-core/scss/utilities/index';
+@import "~nativescript-theme-core/scss/utilities/index";
 // our custom convenient additive class utilities
-@import 'borders';
-@import 'colors';
-@import 'spacing';
-@import 'text';
+@import "borders";
+@import "colors";
+@import "spacing";
+@import "text";
 ```
 
 ## Variables
@@ -63,7 +63,7 @@ It's always a good idea to have your `variables` at the very bottom of the style
 
 ```scss
 // core theme ios/android variables here...
-@import '~nativescript-theme-core/scss/variables';
+@import "~nativescript-theme-core/scss/variables";
 
 // Our apps custom variables
 
@@ -85,16 +85,16 @@ We include the core theme's variable set as a nice baseline set which you can al
 We then add a layer of mixins next. This is important because it also includes the mixins needed by the rest of the core theme layers we add below them. This gives us an opportunity to also keep all the mixins we want for our app nice and tidy as well.
 
 ```scss
-@import '~nativescript-theme-core/scss/mixins/index';
+@import "~nativescript-theme-core/scss/mixins/index";
 
 @mixin fontbrandon($weight: 300) {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: $weight; // 300: light, 400: normal, 500: 700: bold, 800: black
   vertical-align: center;
 }
 
 @mixin fontsfpro($weight: 300) {
-  font-family: 'SF Pro Display';
+  font-family: "SF Pro Display";
   font-weight: $weight; // 300: light, 400: normal, 500: medium, 700: bold
   vertical-align: center;
 }
@@ -102,7 +102,7 @@ We then add a layer of mixins next. This is important because it also includes t
 
 Of course you can have all sorts of sophisticated mixins but this is a good example of things that are nice to define once and reuse everywhere to simplify future maintenance on our app. While we're at it we'll go ahead and drop those custom fonts into our app. Just create a `fonts` folder right in root of app and drop custom fonts in. For example:
 
-[Custom fonts](http://drive.google.com/uc?export=view&id=1gmoTs094rE3z7lFmgBekw2QKXIHM3f2L)
+![Custom fonts](http://drive.google.com/uc?export=view&id=1gmoTs094rE3z7lFmgBekw2QKXIHM3f2L)
 
 ## Core theme rulesets
 
@@ -110,20 +110,20 @@ Here's where we layer in the different rulesets that the core theme provides. Th
 
 ```css
 // {N} core theme rulesets (mix/match these to use what you want/need)
-@import '~nativescript-theme-core/scss/action-bar';
-@import '~nativescript-theme-core/scss/activity-indicator';
-@import '~nativescript-theme-core/scss/buttons';
-@import '~nativescript-theme-core/scss/icons';
-@import '~nativescript-theme-core/scss/forms';
-@import '~nativescript-theme-core/scss/labels';
-@import '~nativescript-theme-core/scss/list-view';
-@import '~nativescript-theme-core/scss/page';
-@import '~nativescript-theme-core/scss/progress';
-@import '~nativescript-theme-core/scss/segmented-bar';
-@import '~nativescript-theme-core/scss/side-drawer';
-@import '~nativescript-theme-core/scss/slider';
-@import '~nativescript-theme-core/scss/switch';
-@import '~nativescript-theme-core/scss/tabs';
+@import "~nativescript-theme-core/scss/action-bar";
+@import "~nativescript-theme-core/scss/activity-indicator";
+@import "~nativescript-theme-core/scss/buttons";
+@import "~nativescript-theme-core/scss/icons";
+@import "~nativescript-theme-core/scss/forms";
+@import "~nativescript-theme-core/scss/labels";
+@import "~nativescript-theme-core/scss/list-view";
+@import "~nativescript-theme-core/scss/page";
+@import "~nativescript-theme-core/scss/progress";
+@import "~nativescript-theme-core/scss/segmented-bar";
+@import "~nativescript-theme-core/scss/side-drawer";
+@import "~nativescript-theme-core/scss/slider";
+@import "~nativescript-theme-core/scss/switch";
+@import "~nativescript-theme-core/scss/tabs";
 ```
 
 You can always reference the [official docs](https://docs.nativescript.org/ui/theme) for what each provides as well as keep the [source reference](https://github.com/NativeScript/theme/blob/master/app/scss) close by as well. In majority of cases these will provide a great baseline to build on top of so give them a shot.
@@ -134,7 +134,7 @@ Finally here is where we start layering in our own app's custom rulesets. It's g
 
 ```css
 // app customizations
-@import 'fonts';
+@import "fonts";
 ```
 
 We can start taking advantage of convenient mixins we defined earlier. For example:
@@ -148,7 +148,7 @@ We can start taking advantage of convenient mixins we defined earlier. For examp
   @include fontbrandon(800);
 }
 
-.font-sfpro-normal{
+.font-sfpro-normal {
   @include fontsfpro(400);
 }
 
@@ -173,9 +173,9 @@ Perhaps most interestingly we add our utilities last. This would often be things
 
 ```css
 // includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/master/app/scss/utilities
-@import '~nativescript-theme-core/scss/utilities/index';
+@import "~nativescript-theme-core/scss/utilities/index";
 // our custom convenient additive class utilities
-@import 'spacing';
+@import "spacing";
 ```
 
 Our `scss/_spacing.scss` file will give us a nice place to put custom spacing utilities our app needs which can help fill in gaps core theme does not provide as well as add new ones.
@@ -220,34 +220,34 @@ We'll demonstrate more on why these should be last as well as how these become h
 
 Lastly to ensure our app will actually use our structure we want to define `app.ios.scss` and `app.android.scss` in the root of our app. This provides yet more opportunities to address per platform style overrides. Here's what these would have in them:
 
-* `app.ios.scss`
+- `app.ios.scss`
 
 ```css
-@import 'scss/index';
-@import 'scss/overrides.ios';
+@import "scss/index";
+@import "scss/overrides.ios";
 ```
 
-* `app.android.scss`
+- `app.android.scss`
 
 ```css
-@import 'scss/index';
-@import 'scss/overrides.android';
+@import "scss/index";
+@import "scss/overrides.android";
 ```
 
 We can now add our override files which also contain references to the core theme.
 
-* `scss/_overrides.ios.scss`
+- `scss/_overrides.ios.scss`
 
 ```css
-@import '~nativescript-theme-core/scss/platforms/index.ios';
+@import "~nativescript-theme-core/scss/platforms/index.ios";
 
 // iOS overrides here...
 ```
 
-* `scss/_overrides.android.scss`
+- `scss/_overrides.android.scss`
 
 ```css
-@import '~nativescript-theme-core/scss/platforms/index.android';
+@import "~nativescript-theme-core/scss/platforms/index.android";
 
 // Android overrides here...
 // for example, this resets the Button to be consistent with iOS
@@ -272,4 +272,4 @@ npm i node-sass -D
 
 Now we can have a look in the iOS Simulator with `tns run ios`. We should immediately see the default app open.
 
-[Default template in iOS Simulator](http://drive.google.com/uc?export=view&id=1DSbTqWWiLSbN7P82x9DTBzQwSwqsdRoZ)
+![Default template in iOS Simulator](http://drive.google.com/uc?export=view&id=1DSbTqWWiLSbN7P82x9DTBzQwSwqsdRoZ)
