@@ -1,0 +1,13 @@
+@import '~nativescript-theme-core/scss/mixins/index';
+
+@mixin fontbrandon($weight: 300) {
+  font-family: 'Brandon Text';
+  font-weight: $weight; // 300: light, 400: normal, 500: 700: bold, 800: black
+  vertical-align: center;
+}
+
+@mixin fontsfpro($weight: 300) {
+  font-family: 'SF Pro Display';
+  font-weight: $weight; // 300: light, 400: normal, 500: medium, 700: bold
+  vertical-align: center;
+}

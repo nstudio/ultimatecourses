@@ -1,0 +1,33 @@
+// {N} variables which are used by core theme + our own
+@import 'variables';
+
+// {N} mixins which are used by core theme + our own
+@import 'mixins';
+
+// {N} core theme rulesets (mix/match these to use what you want/need)
+@import '~nativescript-theme-core/scss/action-bar';
+@import '~nativescript-theme-core/scss/activity-indicator';
+@import '~nativescript-theme-core/scss/buttons';
+@import '~nativescript-theme-core/scss/icons';
+@import '~nativescript-theme-core/scss/forms';
+@import '~nativescript-theme-core/scss/labels';
+@import '~nativescript-theme-core/scss/list-view';
+@import '~nativescript-theme-core/scss/page';
+@import '~nativescript-theme-core/scss/progress';
+@import '~nativescript-theme-core/scss/segmented-bar';
+@import '~nativescript-theme-core/scss/side-drawer';
+@import '~nativescript-theme-core/scss/slider';
+@import '~nativescript-theme-core/scss/switch';
+@import '~nativescript-theme-core/scss/tabs';
+
+// app customizations
+@import 'fonts';
+
+// {N} core theme utilities are additive to any above class, these should always be last
+// includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/master/app/scss/utilities
+@import '~nativescript-theme-core/scss/utilities/index';
+// our custom convenient additive class utilities
+// @import 'borders';
+// @import 'colors';
+@import 'spacing';
+// @import 'text';

@@ -1,0 +1,23 @@
+.font-brandon {
+  @include fontbrandon(400);
+}
+
+.font-brandon-bold {
+  @include fontbrandon(800);
+}
+
+.font-sfpro-normal{
+  @include fontsfpro(400);
+}
+
+.font-sfpro-medium {
+  @include fontsfpro(500);
+}
+
+.font-sfpro-bold {
+  @include fontsfpro(700);
+}
+
+.font-sfpro {
+  @include fontsfpro(500);
+}
