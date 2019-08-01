@@ -27,7 +27,7 @@ class names available for styling your app at https://docs.nativescript.org/ui/t
     <ListView [items]="items" class="list-group">
         <ng-template let-item="item">
             <Label [nsRouterLink]="['/item', item.id]" [text]="item.name"
-                class="list-group-item"></Label>
+                class="list-group-item c-green"></Label>
         </ng-template>
     </ListView>
 </GridLayout>

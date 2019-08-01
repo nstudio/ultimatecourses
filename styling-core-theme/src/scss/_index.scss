@@ -11,11 +11,11 @@
 @import '~nativescript-theme-core/scss/icons';
 @import '~nativescript-theme-core/scss/forms';
 @import '~nativescript-theme-core/scss/labels';
-@import '~nativescript-theme-core/scss/list-view';
+// @import '~nativescript-theme-core/scss/list-view';
 @import '~nativescript-theme-core/scss/page';
 @import '~nativescript-theme-core/scss/progress';
 @import '~nativescript-theme-core/scss/segmented-bar';
-@import '~nativescript-theme-core/scss/side-drawer';
+// @import '~nativescript-theme-core/scss/side-drawer';
 @import '~nativescript-theme-core/scss/slider';
 @import '~nativescript-theme-core/scss/switch';
 @import '~nativescript-theme-core/scss/tabs';
@@ -28,6 +28,6 @@
 @import '~nativescript-theme-core/scss/utilities/index';
 // our custom convenient additive class utilities
 // @import 'borders';
-// @import 'colors';
+@import 'colors';
 @import 'spacing';
 // @import 'text';

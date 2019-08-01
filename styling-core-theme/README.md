@@ -8,7 +8,9 @@ One benefit of NativeScript with regards to using iOS/Android native view compon
 
 This is where NativeScript's core theme can help. It provides a good baseline styling approach (similar to Bootstrap for web components) with regards to achieving more consistent results when styling across iOS and Android.
 
-It comes preloaded and setup by default on all new NativeScript projects. You can learn more on the [official styling docs here](https://docs.nativescript.org/ui/theme). In particular a great overview of SASS integration is explained [here](https://docs.nativescript.org/ui/theme#sass-usage).
+> NOTE: This post will cover nativescript-theme-core 1.x which is still widely in use although recently as of July 2019 a 2.x version has been released. We'll cover 2.x in a future article however 1.x is still *very* good and useful today and well into the future with NativeScript.
+
+You can learn more on the [official styling docs here](https://docs.nativescript.org/ui/theme). In particular a great overview of SASS integration is explained [here](https://docs.nativescript.org/ui/theme#sass-usage).
 
 However I want to show you how to take things a bit farther with the SASS setup to take advantage of the core theme's flexibility. This setup is what our team at [nStudio](https://nstudio.io/) use in majority of our professional NativeScript projects. Just like with Bootstrap you can utilize bits/pieces of the core theme you want and build on top of it to get great results while keeping your mobile styling maintainable.
 
@@ -48,7 +50,7 @@ Let's start by creating a `scss/_index.scss`(we create a `scss` folder in the ro
 @import "buttons";
 
 // {N} core theme utilities are additive to any above class, these should always be last
-// includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/master/app/scss/utilities
+// includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss/utilities
 @import "~nativescript-theme-core/scss/utilities/index";
 // our custom convenient additive class utilities
 @import "borders";
@@ -78,7 +80,7 @@ $medium-text: 16;
 $small-text: 12;
 ```
 
-We include the core theme's variable set as a nice baseline set which you can always reference [here](https://github.com/NativeScript/theme/blob/master/app/scss/_variables.scss). We then add our own custom variables for anything we want to standardize across our app.
+We include the core theme's variable set as a nice baseline set which you can always reference [here](https://github.com/NativeScript/theme/blob/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss/_variables.scss). We then add our own custom variables for anything we want to standardize across our app.
 
 ## Mixins
 
@@ -126,7 +128,7 @@ Here's where we layer in the different rulesets that the core theme provides. Th
 @import "~nativescript-theme-core/scss/tabs";
 ```
 
-You can always reference the [official docs](https://docs.nativescript.org/ui/theme) for what each provides as well as keep the [source reference](https://github.com/NativeScript/theme/blob/master/app/scss) close by as well. In majority of cases these will provide a great baseline to build on top of so give them a shot.
+You can always reference the [official docs](https://docs.nativescript.org/ui/theme) for what each provides as well as keep the [source reference](https://github.com/NativeScript/theme/tree/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss) close by as well. In majority of cases these will provide a great baseline to build on top of so give them a shot.
 
 ## Custom app styles
 
@@ -172,7 +174,7 @@ This provides easy/clear classes we can add to any NativeScript view component w
 Perhaps most interestingly we add our utilities last. This would often be things like color, spacing and text helper classes. The reason we add these last is we want to be sure these are always additive/overriding styles. NativeScript does not support `!important` flag so we want a way to tack on a utility class which would not be thwarted by potentially other characteristics defined in classes which they could be combined with.
 
 ```css
-// includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/master/app/scss/utilities
+// includes (core theme's color, spacing, and text helpers): https://github.com/NativeScript/theme/tree/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss/utilities
 @import "~nativescript-theme-core/scss/utilities/index";
 // our custom convenient additive class utilities
 @import "spacing";
@@ -273,3 +275,107 @@ npm i node-sass -D
 Now we can have a look in the iOS Simulator with `tns run ios`. We should immediately see the default app open.
 
 ![Default template in iOS Simulator](http://drive.google.com/uc?export=view&id=1DSbTqWWiLSbN7P82x9DTBzQwSwqsdRoZ)
+
+Let's now change the color of those row items. If we open the `items.component.html` for that view you'll notice it has a `list-group-item` class on it. This class definition is defined from the core theme here:
+https://github.com/NativeScript/theme/blob/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss/_list-view.scss#L2
+
+We could change the text color by putting `color="blue"` directly on `Label` if we wanted but more likely we will want a color utility class to be able to colorize anything in our app with this new text color. Let's add a variable for this new color we are going to start using in our app.
+
+Open `scss/_variables.scss` and add the following:
+
+```
+$green: #25c761;
+```
+
+Now create `scss/_colors.scss` to define a nice color utility class we can use anywhere:
+
+```
+.c-green {
+  color: $green;
+}
+```
+
+We will follow a common naming scheme to prefix the class with `c-` if it defines just a `color` we can apply.
+
+Now we want to make sure our new `_colors.scss` utility classes are included in our setup. Open `scss/_index.scss` and include them towards the bottom after the core theme utilities:
+
+```
+@import '~nativescript-theme-core/scss/utilities/index';
+// our custom convenient additive class utilities
+@import 'colors';  // <-- ADDED HERE
+@import 'spacing';
+```
+
+Let's now add that class to the row items:
+
+```
+<ListView [items]="items" class="list-group">
+    <ng-template let-item="item">
+        <Label [nsRouterLink]="['/item', item.id]" [text]="item.name"
+            class="list-group-item c-green"></Label>
+    </ng-template>
+</ListView>
+```
+
+If you save and look at the app you'll notice something depressing. The color did *not* change to green. 
+
+## Gain control over core theme
+
+This is our most important lesson to understand about the core theme's setup. The `list-group-item` class actually contains a color definition on it already and our `c-green` is not overriding it. As mentioned earlier we don't have `!important` with NativeScript. So what is going on?
+
+This case is one of class specific scoping. The core theme defines `list-group-item` as a scoped class *inside* `list-group` as you can see here: https://github.com/NativeScript/theme/blob/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss/_list-view.scss#L2 
+This scoping takes precedence because it's the most specific. 
+
+When we encounter cases like this we may decide to simply turn off the core theme list-view styles commenting out them out from our index:
+
+```
+//@import "~nativescript-theme-core/scss/list-view";
+```
+
+That will make our `c-green` class show up right away. However you'll notice another interesting thing here. Somehow the list row items still have padding even though we commented out the `list-view` classes. So where is *that* coming from?
+
+This is coming from the core theme's overrides file which we reference in `scss/_overrides.ios.scss` - it's coming from this import:
+
+```
+@import '~nativescript-theme-core/scss/platforms/index.ios';
+```
+
+If we look at those in the core theme [here](https://github.com/NativeScript/theme/blob/c1f8b50cd53f611c58b526cf14955a972d35c787/app/scss/platforms/_index.ios.scss#L10) we'll find that it references a few iOS overrides and in particular a few list-view overrides. If we want fine grain control over these we can expand our `scss/_overrides.ios.scss` to include the specific pieces we want like this:
+
+* `scss/_overrides.ios.scss`:
+
+```
+@import '~nativescript-theme-core/scss/platforms/buttons.ios';
+@import '~nativescript-theme-core/scss/platforms/forms.ios';
+@import '~nativescript-theme-core/scss/platforms/labels.ios';
+@import '~nativescript-theme-core/scss/platforms/slider.ios';
+@import '~nativescript-theme-core/scss/platforms/side-drawer.ios';
+@import '~nativescript-theme-core/scss/platforms/switches.ios';
+//@import '~nativescript-theme-core/scss/platforms/list-view.ios';
+@import '~nativescript-theme-core/scss/platforms/segmented-bar.ios';
+```
+
+Here we expand all the overrides and comment out the `list-view.ios` override. We leave it commented out here as it's possible we may want to return to that default override ruleset in the future on this project.
+
+If we run our app now we should see a much more bare bones look which has *just* our `c-green` color on the text of the row items now:
+
+![Look at list rows with no baseline styles except custom green color we added](http://drive.google.com/uc?export=view&id=1fuRW5Ygoo_baHPwcOqfFSmMWF-4wCs2E)
+
+Alternatively instead of commenting out the core theme's `list-view` styles in our `scss/_index.scss` and in our `scss/_overrides.ios.scss` we could keep them and simply use a similarly scoped style to override the color, for example:
+
+```
+.list-group {
+  .list-group-item {
+    color: $green;
+  }
+}
+```
+
+This would also work just as well and the bottom line is you have a flexible options to gain control over the core theme by using the *SASS* it provides in a more à la carte fashion.
+
+## Conclusion
+
+The core theme is a *great* base to build an app on. It offers you the ability to use everything it offers in a pure à la carte fashion providing opportunities to scale nicely from a solid foundation without sacrificing control over all style aspects of your app. 
+
+
+
