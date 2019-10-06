@@ -284,4 +284,4 @@ I won't cover every detail here however a couple things of note:
 
 ## Have fun creating your own custom native views!
 
-You can explore and run all the code mentioned in this article [here]().
+You can explore and run all the code mentioned in this article [here](https://github.com/nstudio/ultimatecourses/tree/master/native-ui).
